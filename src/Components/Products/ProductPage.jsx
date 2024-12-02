@@ -32,7 +32,7 @@ const ProductPage = () => {
                     <Image src={currentProduct.mainImage} style={{ maxWidth: '300px'}} rounded />
                 </Col>
                 <Col  md={8}>
-                    
+                    { currentProduct.description }
                 </Col>
             </Row>
         </Container>
