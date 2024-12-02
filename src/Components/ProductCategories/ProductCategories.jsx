@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch} from 'react-redux';
 import { useSelector } from 'react-redux';
-import { fetchProductCategories } from '../../redux/action/ProductCategoryAction';
+import { fetchProductCategories, setCurrentProductCategory } from '../../redux/action/ProductCategoryAction';
 import ProductCategoriesCard from './ProductCategoriesCard.jsx';
 import Container from 'react-bootstrap/Container';
 
@@ -10,9 +10,9 @@ const ProductCategories = () =>
   console.log('ProductCategories component rendered');
 
   const dispatch = useDispatch();
-  const { categories, loading, error } = useSelector((state) => state.productCategory);
+  const { currentCategory, categories, loading, error } = useSelector((state) => state.productCategory);
 
-  //Завантажуємо продукти під час монтування компонента
+  //Завантажуємо категорії під час монтування компонента
   useEffect(() => {
     console.log('useEffect triggered');
     dispatch(fetchProductCategories());
@@ -21,7 +21,6 @@ const ProductCategories = () =>
   if (loading) return <div className="d-flex justify-content-center">Loading categories...</div>;
   if (error) return <div className="d-flex justify-content-center">Error occured while fetching categories: {error}</div>;
 
-  //Відображаємо відфільтровані продукти або всі продукти, якщо фільтрація не активована
   if (categories.length > 0)
   {
     return (

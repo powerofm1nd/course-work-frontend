@@ -3,11 +3,14 @@ import { Container, Button, Form } from 'react-bootstrap';
 import { useDispatch,  useSelector} from 'react-redux';
 import { fetchProductCategories } from '../../redux/action/ProductCategoryAction';
 import { createProduct } from '../../redux/action/ProductAction';
+import { useNavigate } from 'react-router-dom';
+
 
 const AddProduct = () => {
     const dispatch = useDispatch();
     const { categories } = useSelector((state) => state.productCategory);
-    const { lastCreatedProduct } = useSelector((state) => state.product);
+    const { currentProduct } = useSelector((state) => state.product);
+    const navigate = useNavigate();
 
     //Завантажуємо категорії продуктів під час монтування компонента
     useEffect(() => {
@@ -15,8 +18,10 @@ const AddProduct = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log('useEffect lastCreatedProduct lastCreatedProduct lastCreatedProduct');
-    }, [lastCreatedProduct]);
+        if (currentProduct?.id) {
+            navigate(`/product/${currentProduct.id}`);
+        }
+    }, [currentProduct, navigate]);
 
 
     // Стан для кожного поля форми
@@ -150,9 +155,7 @@ const AddProduct = () => {
                 </Form.Group>
 
                 {/* Кнопка відправки форми */}
-                <Button variant="primary" type="submit">
-                    Додати товар
-                </Button>
+                <Button variant="primary" type="submit">Додати товар</Button>
             </Form>
         </Container>
     );

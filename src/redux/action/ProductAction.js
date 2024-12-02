@@ -25,8 +25,6 @@ export const getProduct = (productId) => {
     return async (dispatch) => {
         dispatch({ type: 'GET_PRODUCT_REQUEST' });
 
-       
-
         try {
             const response = await fetch(`https://localhost:7106/api/product/get?productId=${productId}`, {
                 method: 'GET',

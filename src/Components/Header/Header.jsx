@@ -2,11 +2,27 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Button } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../redux/action/UserAction'
 
 const Header = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const isActive = (path) => location.pathname === path;
+    const { currentUser, loading } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+
+    if (loading) return "";
+
+    const handleRegistrationClick = () => {
+        navigate('/registration');
+    }
+
+    const handleAuthorizationClick = () => {
+        navigate('/authorization');
+    }
+
 
     return (
         <Navbar bg="dark" data-bs-theme="dark">
@@ -31,16 +47,19 @@ const Header = () => {
                     >
                         Про нас
                     </Nav.Link>
-                    <Nav.Link 
-                        href="/AddProduct" 
-                        className={isActive('/AddProduct') ? 'active' : ''}
-                    >
-                        Додати товар
-                    </Nav.Link>
+
+                    { currentUser?.isAdmin == true ? <Nav.Link href="/AddProduct"  className={isActive('/AddProduct') ? 'active' : ''}>Додати товар</Nav.Link> : "" }
+
                 </Nav>
                 <Nav>
-                    <Button variant="light" className='m-1'>Login</Button>
-                    <Button variant="danger" className='m-1'>Logout</Button>
+                    { currentUser == null ? 
+                        <>
+                            <Button variant="light" className='m-1' onClick={handleRegistrationClick}>Реєстрація</Button>
+                            <Button variant="light" className='m-1' onClick={handleAuthorizationClick}>Авторизація</Button>
+                        </> 
+                            : <Button variant="danger" className='m-1' onClick={()=> {dispatch(logout())}}>Вийти</Button>
+                    }
+                    
                 </Nav>
             </Container>
         </Navbar>

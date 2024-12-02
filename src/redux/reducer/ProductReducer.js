@@ -43,4 +43,3 @@ export const productReducer = (state = initialState, action) => {
 
     return newState;
 };
-

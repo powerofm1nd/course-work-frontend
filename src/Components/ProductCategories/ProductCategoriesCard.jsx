@@ -2,17 +2,10 @@ import { useDispatch } from "react-redux";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { setCurrentProductCategory } from '../../redux/action/ProductCategoryAction';
+import { setPageNumber } from '../../redux/action/ProductPageAction';
 
 const ProductCategoriesCard = ({ category }) => {
   const dispatch = useDispatch();
-
-  const scrollToHeadline = () => {
-    const headlineElement = document.getElementById('productsHeadline');
-    console.log("headlineElement - " + headlineElement)
-    if (headlineElement) {
-      headlineElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
 
   return (
     <Card style={{ width: '17rem', margin: '5px', minWidth: '305px' }}>
@@ -23,8 +16,8 @@ const ProductCategoriesCard = ({ category }) => {
         <Button
           variant="primary w-100"
           onClick={() => {
+            dispatch(setPageNumber(1));
             dispatch(setCurrentProductCategory(category.id));
-            scrollToHeadline();
           }}
         >
           Показати
