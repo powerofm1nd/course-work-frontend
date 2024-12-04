@@ -10,7 +10,7 @@ const ProductCategories = () =>
   console.log('ProductCategories component rendered');
 
   const dispatch = useDispatch();
-  const { currentCategory, categories, loading, error } = useSelector((state) => state.productCategory);
+  const { categories, loading, error } = useSelector((state) => state.productCategory);
 
   //Завантажуємо категорії під час монтування компонента
   useEffect(() => {

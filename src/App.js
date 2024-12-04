@@ -12,6 +12,10 @@ import AuthorizationPage from './Components/Authorization/AuthorizationPage.jsx'
 import { getUser } from "./redux/action/UserAction"
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Basket from './Components/Basket/Basket.jsx';
+import OrderPage from './Components/Orders/OrderPage.jsx';
+import ManageOrderPage from './Components/Orders/ManageOrderPage.jsx';
+import AboutUs from './Components/AboutUs/AboutUs.jsx';
 
 
 function App() {
@@ -29,9 +33,9 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route index element={
+        <Route index element = {
           <>
-            {welcomeHeader()}
+            { welcomeHeader() }
             <ProductCategories />
             <ProductsPage />
             <Container>
@@ -43,6 +47,10 @@ function App() {
         <Route path="/Product/:id" element={<ProductPage />} />
         <Route path="/Registration" element={<RegistrationPage />} />
         <Route path="/Authorization" element={<AuthorizationPage />} />
+        <Route path="/Basket" element={<Basket />} />
+        <Route path="/MyOrders" element={<OrderPage />} />
+        <Route path="/ManageOrders" element={<ManageOrderPage />} />
+        <Route path="/AboutUs" element={<AboutUs />} />
       </Routes>
     </>
   );

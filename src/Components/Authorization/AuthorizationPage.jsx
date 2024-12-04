@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from "react-redux";
 import { authUser } from "../../redux/action/UserAction"
 import { useNavigate } from 'react-router-dom';
+
 const AuthorizationPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

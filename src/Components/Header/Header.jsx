@@ -6,6 +6,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/action/UserAction'
 
+
+
 const Header = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -35,21 +37,20 @@ const Header = () => {
                     >
                         Головна сторінка
                     </Nav.Link>
-                    <Nav.Link 
-                        href="/MyOrders" 
-                        className={isActive('/MyOrders') ? 'active' : ''}
-                    >
-                        Мої замовлення
-                    </Nav.Link>
+                    
+                    
+                    { currentUser?.isAdmin == true ? <Nav.Link href="/ManageOrders" className={isActive('/ManageOrders') ? 'active' : ''}>Замовлення користувачів</Nav.Link> : 
+                                                     <Nav.Link href="/MyOrders" className={isActive('/MyOrders') ? 'active' : ''}>Мої замовлення</Nav.Link> }
+                   
                     <Nav.Link 
                         href="/AboutUs" 
                         className={isActive('/AboutUs') ? 'active' : ''}
                     >
                         Про нас
                     </Nav.Link>
-
-                    { currentUser?.isAdmin == true ? <Nav.Link href="/AddProduct"  className={isActive('/AddProduct') ? 'active' : ''}>Додати товар</Nav.Link> : "" }
-
+                    
+                    { currentUser?.isAdmin != true ? <Nav.Link href="/Basket" className={isActive('/Basket') ? 'active' : ''}>Кошик</Nav.Link> : "" }
+                    { currentUser?.isAdmin == true ? <Nav.Link href="/AddProduct" className={isActive('/AddProduct') ? 'active' : ''}>Додати товар</Nav.Link> : "" }
                 </Nav>
                 <Nav>
                     { currentUser == null ? 
